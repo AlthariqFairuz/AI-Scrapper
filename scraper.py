@@ -20,7 +20,7 @@ class SearchParams:
     breed: Optional[str] = None
 
 class Scrapper:
-    """Scraper class with pagination support"""
+    """Scraper class"""
     
     def __init__(self, base_url: str = "https://www.amgr.org/frm_directorySearch.cfm"):
         self.base_url = base_url
@@ -33,44 +33,15 @@ class Scrapper:
         self._setup_openrouter()
     
     def _setup_openrouter(self):
-        """Setup OpenRouter client for natural language processing"""
-        
-        self.openrouter_client = OpenAI(
-            base_url="https://openrouter.ai/api/v1",
-            api_key= OPENROUTER_API_KEY
-        )
 
-        """Scrape available form options from the website"""
         try:
-            response = self.session.get(self.base_url)
-            response.raise_for_status()
-            
-            soup = BeautifulSoup(response.content, 'html.parser')
-            options = {}
-            
-            select_elements = soup.find_all('select')
-            
-            for select in select_elements:
-                name = select.get('name', '').lower()
-                if any(keyword in name for keyword in ['state', 'member', 'breed']):
-                    option_values = []
-                    for option in select.find_all('option'):
-                        value = option.get('value', '').strip()
-                        text = option.get_text().strip()
-                        if value and text:
-                            option_values.append(f"{text} ({value})")
-                    
-                    if 'state' in name:
-                        options['states'] = option_values
-                    elif 'member' in name:
-                        options['members'] = option_values
-                    elif 'breed' in name:
-                        options['breeds'] = option_values
-            
-            return options
-            
-        except requests.RequestException as e:
-            print(f"Error fetching form options: {e}")
+            self.openrouter_client = OpenAI(
+                base_url="https://openrouter.ai/api/v1",
+                api_key= OPENROUTER_API_KEY
+            )
+
+        except Exception as e:
+            print(f"Error: {e}")
             return {}
     
     def parse_natural_language(self, command: str) -> SearchParams:
@@ -314,7 +285,7 @@ class Scrapper:
                         link = cell.find('a')
                         if link and link.get('href'):
                             href = link.get('href')
-                            #  make relative URL absolute
+                            #  make  URL absolute
                             if href.startswith('/') or not href.startswith('http'):
                                 href = urljoin(self.base_url, href)
                             cell_text = f"{cell_text} [{href}]"
@@ -355,7 +326,6 @@ def main():
     parser.add_argument('--breed', help='Breed to search for')
     parser.add_argument('--natural', help='Natural language command')
     parser.add_argument('--interactive', action='store_true', help='Interactive mode')
-    parser.add_argument('--max-pages', type=int, default=10, help='Maximum pages to scrape (default: 10)')
     
     args = parser.parse_args()
     
@@ -376,7 +346,7 @@ def main():
                     params = scraper.parse_natural_language(command)
                     print(f"Searching: State={params.state}, Member={params.member}, Breed={params.breed}")
                     
-                    results = scraper.perform_search(params, max_pages=args.max_pages)
+                    results = scraper.perform_search(params)
                     scraper.display_results(results)
                 
             except KeyboardInterrupt:
@@ -394,15 +364,14 @@ def main():
             breed=args.breed
         )
     
-    # Perform search
     if args.natural or any([params.state, params.member, params.breed]):
-        results = scraper.perform_search(params, max_pages=args.max_pages)
+        results = scraper.perform_search(params)
         scraper.display_results(results)
     else:
         print("No search parameters provided. Use --help for usage information.")
         
         print("\nExample commands:")
-        print("python scraper.py --state Kansas --member 'Dwight Elmore' --max-pages 5")
+        print("python scraper.py --state Kansas --member 'Dwight Elmore'")
         print("python scraper.py --natural 'Find members in Kansas with American Red breed'")
         print("python scraper.py --interactive")
 
