@@ -206,12 +206,11 @@ class Scrapper:
                     
                     page_results = self._parse_results(str(next_soup).encode())
                     all_results.extend(page_results)
-                    print(f"Found {len(page_results)} results on page {current_page}")
                     
                     pagination_info = self._check_pagination(next_soup)
                     pages_processed += 1
                     
-                    time.sleep(1)
+                    time.sleep(1) #delay to limit
                     
                     if not pagination_info['next_enabled']:
                         break
