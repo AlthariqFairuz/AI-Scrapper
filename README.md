@@ -1,6 +1,6 @@
 # AI Scrapper
 
-A Python web scraper for the AMGR (American Maine-Anjou Association) Directory with natural language processing capabilities.
+A Python web scraper for the AMGR with natural language processing capabilities.
 
 ## Features
 
