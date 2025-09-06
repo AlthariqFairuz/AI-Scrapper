@@ -76,6 +76,10 @@ In interactive mode, you can enter natural language commands:
 ## Output
 
 Results are displayed in a formatted table.
+<img width="1451" height="263" alt="image" src="https://github.com/user-attachments/assets/5a291dc7-0e55-45bd-a428-18036fcaca00" />
+<img width="1458" height="275" alt="image" src="https://github.com/user-attachments/assets/6e4f5a4f-0ae9-4fc6-95f1-608da7282b2d" />
+<img width="1124" height="104" alt="image" src="https://github.com/user-attachments/assets/45a0655f-a3fe-4199-b489-637223d0d11a" />
+<img width="1083" height="260" alt="image" src="https://github.com/user-attachments/assets/e43f0df7-2462-40e0-ae83-177f53ce8c96" />
 
 ## Rate Limiting
 
