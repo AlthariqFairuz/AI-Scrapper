@@ -25,7 +25,7 @@ cd MrScrapper
 
 2. Install required dependencies:
 ```bash
-pip install requests beautifulsoup4 openai python-dotenv
+pip install-r requirements.txt
 ```
 
 3. Create a `.env` file and add your OpenRouter API key:

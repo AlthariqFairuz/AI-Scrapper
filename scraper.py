@@ -210,7 +210,7 @@ class Scrapper:
                     pagination_info = self._check_pagination(next_soup)
                     pages_processed += 1
                     
-                    time.sleep(1) #delay to limit
+                    time.sleep(1) #delay to avoid limit
                     
                     if not pagination_info['next_enabled']:
                         break
