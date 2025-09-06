@@ -4,15 +4,16 @@ A Python web scraper for the AMGR with natural language processing capabilities.
 
 ## Features
 
-- **Web Scraping**: Scrapes the AMGR Directory (amgr.org) with support for state, member, and breed filters
+- **Web Scraping**: Scrapes the AMGR website with support for state, member, and breed filters
 - **Pagination Support**: Automatically handles paginated results across multiple pages
 - **Natural Language Processing**: Uses OpenRouter API to parse natural language commands into search parameters
 - **Interactive Mode**: Command-line interface with interactive search capabilities
 - **CLI Support**: Direct command-line arguments for programmatic usage
+- **Regex Pattern Matching**: String matching with regex support for flexible searches
 
 ## Prerequisites
 
-- Python 3.7+
+- Python 3.9+
 - OpenRouter API key (for natural language processing)
 
 ## Installation
@@ -74,7 +75,7 @@ In interactive mode, you can enter natural language commands:
 
 ## Output
 
-Results are displayed in a formatted table showing all available information from the AMGR Directory, including member details, locations, and contact information with clickable links.
+Results are displayed in a formatted table.
 
 ## Rate Limiting
 
