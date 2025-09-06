@@ -1,4 +1,4 @@
-# MrScrapper
+# AI Scrapper
 
 A Python web scraper for the AMGR (American Maine-Anjou Association) Directory with natural language processing capabilities.
 
